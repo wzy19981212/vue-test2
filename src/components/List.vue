@@ -1,17 +1,14 @@
 <template>
-  <div class="col-md-8">
-    <h3 class="reply">评论回复：</h3>
-    <h2 style="display: none">暂无评论，点击左侧添加评论！！！</h2>
-    <ul class="list-group">
-      <Item
-        v-for="(comment, index) in coms"
-        :key="comment.id"
-        :comment="comment"
-        :delcomment="delcomment"
-        :index="index"
-      ></Item>
-    </ul>
-  </div>
+  <ul class="todo-main">
+    <Item
+      v-for="(item, index) in todos"
+      :key="item.id"
+      :item="item"
+      :updateOne="updateOne"
+      :index="index"
+      :delOne="delOne"
+    ></Item>
+  </ul>
 </template>
 
 <script>
@@ -20,12 +17,24 @@ export default {
   components: {
     Item,
   },
-  props: ["coms", "delcomment"],
+  props: ["todos", "updateOne", "delOne"],
 };
 </script>
 
-<style scoped>
-.reply {
-  margin-top: 0px;
+<style  scoped>
+.todo-main {
+  margin-left: 0px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding: 0px;
+}
+
+.todo-empty {
+  height: 40px;
+  line-height: 40px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  padding-left: 5px;
+  margin-top: 10px;
 }
 </style>

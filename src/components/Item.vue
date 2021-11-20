@@ -1,55 +1,80 @@
 <template>
-  <li class="list-group-item">
-    <div class="handle">
-      <a href="javascript:;" @click="del">删除</a>
-    </div>
-    <p class="user">
-      <span>{{ comment.username }}</span
-      ><span>说:</span>
-    </p>
-    <p class="centence">{{ comment.content }}</p>
+  <li
+    @mouseenter="isOK = true"
+    @mouseleave="isOK = false"
+    :class="{ myClass: isOK }"
+  >
+    <label>
+      <input type="checkbox" :checked="item.done" @click="updateO" />
+      <span>{{ item.content }}</span>
+    </label>
+    <button class="btn btn-danger" v-show="isOK" @click="delO">删除</button>
   </li>
 </template>
 
 <script>
 export default {
-  props: ["comment", "index", "delcomment"],
-  methods: {
-    del() {
-      if (confirm("确定删除吗")) {
-        this.delcomment(this.index);
-      }
+  computed: {
+    ischecked: {
+      get() {
+        return this.item.done;
+      },
+      set() {},
     },
   },
+  methods: {
+    updateO() {
+      this.updateOne(this.index);
+    },
+    delO() {
+      this.delOne(this.index);
+    },
+  },
+  data() {
+    return {
+      isOK: false,
+    };
+  },
+  props: ["item", "index", "updateOne", "delOne"],
 };
 </script>
 
-<style scoped>
+<style  scoped>
+.myClass {
+  background-color: rgb(132, 66, 197);
+}
+/*item*/
 li {
-  transition: 0.5s;
-  overflow: hidden;
+  list-style: none;
+  height: 36px;
+  line-height: 36px;
+  padding: 0 5px;
+  border-bottom: 1px solid #ddd;
 }
 
-.handle {
-  width: 40px;
-  border: 1px solid #ccc;
-  background: #fff;
-  position: absolute;
-  right: 10px;
-  top: 1px;
-  text-align: center;
+li label {
+  float: left;
+  cursor: pointer;
 }
 
-.handle a {
-  display: block;
-  text-decoration: none;
+li label li input {
+  vertical-align: middle;
+  margin-right: 6px;
+  position: relative;
+  top: -1px;
 }
 
-.list-group-item .centence {
-  padding: 0px 50px;
+li button {
+  float: right;
+
+  margin-top: 3px;
 }
 
-.user {
-  font-size: 22px;
+li:before {
+  content: initial;
+}
+
+li:last-child {
+  border-bottom: none;
 }
 </style>
