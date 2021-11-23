@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+    <script src="https://cdn.bootcdn.net/ajax/libs/axios/0.21.1/axios.js"></script>
+    <script>
+        axios({
+            url: 'https://api.github.com/search/repositories?q=v&sort=stars',
+            method: 'GET'
+        }).then((response) => {
+            console.log(response);
+        }).catch(() => {
+            //函数体
+        })
+    </script>
+</body>
+
+</html>
